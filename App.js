@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Button } from 'react-native';
+import { styles } from './style.js';
 
 export default function App() {
+  const [numero, setNumero] = useState(null);
+
+  const sortearNumero = () => {
+    const numeroAleatorio = Math.floor(Math.random() * 10) + 1;
+    setNumero(numeroAleatorio);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.titulo}>Sortear um número</Text>
+      <View style={styles.btn}>
+        <Button title="SORTEAR" onPress={sortearNumero} color="#fff" />
+      </View>
+      <Text style={styles.resultado}>
+        {numero ? `Número sorteado: ${numero}` : 'Nenhum número sorteado'}
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
