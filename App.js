@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
-import { styles } from './style.js';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import LoadingScreen from './screens/LoadingScreen';
+import HomeScreen from './screens/HomeScreen';
+import SignUpScreen from './screens/SignUpScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [numero, setNumero] = useState(null);
-
-  const sortearNumero = () => {
-    const numeroAleatorio = Math.floor(Math.random() * 10) + 1;
-    setNumero(numeroAleatorio);
-  };
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Sortear um número</Text>
-      <View style={styles.btn}>
-        <Button title="SORTEAR" onPress={sortearNumero} color="#fff" />
-      </View>
-      <Text style={styles.resultado}>
-        {numero ? `Número sorteado: ${numero}` : 'Nenhum número sorteado'}
-      </Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Loading">
+        <Stack.Screen name="Loading" component={LoadingScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
